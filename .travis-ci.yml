@@ -1,0 +1,19 @@
+notifications:
+  email: false
+language: node_js
+node_js:
+  - '8'
+services:
+  - docker
+before_script:
+  - sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+  - apt-get update
+  - apt-get install google-chrome-stable
+  - npm install -g vue-cli
+script:
+  - yes "" | vue init . test
+  - cd test/
+  - npm i
+  - npm run lint
+  - npm run test
+  - npm run build
